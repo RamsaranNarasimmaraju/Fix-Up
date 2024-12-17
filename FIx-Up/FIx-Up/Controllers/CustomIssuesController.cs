@@ -41,6 +41,7 @@ namespace FIx_Up.Controllers
 
         // POST api/<CustomIssuesController>
         [HttpPost]
+        [Authorize(Roles ="Support Engineer,User")]
         public async Task<ActionResult<CustomIssueReadDto>> Post(CustomIssueCreateDto CustomIssueDto)
         {
             // Add a new CustomIssue, and return the CustomIssueReadDto

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FIx_Up.Controllers
 {
@@ -30,6 +31,7 @@ namespace FIx_Up.Controllers
 
         // GET: api/Tickets
         [HttpGet]
+        [Authorize(Roles ="Support Engineer,User")]
         public async Task<ActionResult<IEnumerable<TicketReadDto>>> GetTickets()
         {
             var tickets = await _ticketRepo.GetAll();
@@ -66,6 +68,7 @@ namespace FIx_Up.Controllers
 
         // PUT: api/Tickets/{id}
         [HttpPut("{id}")]
+        [Authorize(Roles ="Support Engineer")]
         public async Task<IActionResult> UpdateTicket(int id, [FromBody] TicketUpdateDto ticketDto)
         {
             if (id != ticketDto.TicketId)

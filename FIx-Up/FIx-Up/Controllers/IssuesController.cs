@@ -20,7 +20,7 @@ namespace FIx_Up.Controllers
 
         // GET: api/<IssuesController>
         [HttpGet]
-      
+        [Authorize(Roles ="Support Engineer,User")]
         public async Task<ActionResult<IEnumerable<IssueReadDto>>> Get()
         {
             var Issues = await _repo.GetAll(); // Get all Issues as IssueReadDto
@@ -41,6 +41,7 @@ namespace FIx_Up.Controllers
 
         // POST api/<IssuesController>
         [HttpPost]
+        [Authorize(Roles ="Support Engineer")]
         public async Task<ActionResult<IssueReadDto>> Post(IssueCreateDto IssueDto)
         {
             // Add a new Issue, and return the IssueReadDto

@@ -20,7 +20,7 @@ namespace FIx_Up.Controllers
 
         // GET: api/<UsersController>
         [HttpGet]
-       
+        [Authorize(Roles ="Admin,SupportEngineer,User")]
         public async Task<ActionResult<IEnumerable<UserReadDto>>> Get()
         {
             var users = await _repo.GetAll(); // Get all users as UserReadDto
@@ -41,6 +41,7 @@ namespace FIx_Up.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
+        [Authorize(Roles ="Admin,User")]
         public async Task<ActionResult<UserReadDto>> Post( UserCreateDto userDto)
         {
             // Add a new user, and return the UserReadDto

@@ -20,6 +20,7 @@ namespace FIx_Up.Controllers
 
         // GET: api/<SolutionsController>
         [HttpGet]
+        [Authorize(Roles = "Support Engineer,User")]
 
         public async Task<ActionResult<IEnumerable<SolutionReadDto>>> Get()
         {
@@ -41,6 +42,7 @@ namespace FIx_Up.Controllers
 
         // POST api/<SolutionsController>
         [HttpPost]
+        [Authorize(Roles ="Support Engineer")]
         public async Task<ActionResult<SolutionReadDto>> Post(SolutionCreateDto SolutionDto)
         {
             // Add a new Solution, and return the SolutionReadDto
