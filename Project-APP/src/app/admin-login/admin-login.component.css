@@ -1,0 +1,8 @@
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    backdrop-filter: blur(5px); /* Optional: adds blur effect behind the navbar */
+  }
+  
+  .navbar a {
+    color: #007bff !important; /* Ensure the navbar links are visible */
+  }

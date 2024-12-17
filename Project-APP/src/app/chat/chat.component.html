@@ -1,0 +1,109 @@
+<div class="container-fluid p-0">
+    <!-- Navbar -->
+    <nav
+    class="navbar navbar-expand-lg navbar-light fixed-top"
+    style="background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px);"
+  >
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+         
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/User-dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/about">About</a>
+          </li>
+       
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+    <!-- Chat Section -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+      <div class="phone-frame shadow-lg rounded-3">
+        <div class="chat-header">
+          <h4>Customer Support</h4>
+        </div>
+  
+        <div class="chat-body">
+          <!-- Start Chat Button - Centered -->
+          <div *ngIf="!showChat" class="chat-button-container d-flex justify-content-center align-items-center">
+            <button class="btn btn-lg btn-outline-primary" (click)="startChat()">Start Chat</button>
+          </div>
+  
+          <!-- Issue List -->
+          <div *ngIf="showChat && !currentIssue" class="issue-list animate-from-bottom">
+            <h5 class="mb-3">Choose your issue:</h5>
+            <div *ngFor="let issue of issues">
+              <button class="btn btn-outline-secondary w-100 mb-2" (click)="selectIssue(issue.issueId)">
+                {{ issue.issueCategory }}
+              </button>
+            </div>
+            <button class="btn btn-outline-info w-100 mb-2" (click)="showCustomIssueForm = true">Add Custom Issue</button>
+          </div>
+  
+          <!-- Solution List -->
+          <div *ngIf="currentIssue && !currentSolution" class="solution-list animate-from-bottom">
+            <h5 class="mb-3">Solutions for: {{ currentIssue.issueCategory }}</h5>
+            <div *ngFor="let solution of solutions">
+              <button class="btn btn-outline-success w-100 mb-2" (click)="selectSolution(solution.solutionId)">
+                {{ solution.solution1 }}
+              </button>
+            </div>
+          </div>
+  
+          <!-- Solution Details with Yes/No Option -->
+          <div *ngIf="currentSolution" class="answer-check animate-from-bottom">
+            <p class="mb-3">{{ currentSolution.solution1 }}</p>
+            <p>Did you find the answer you were looking for?</p>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-success w-45" (click)="onAnswerReceived(true)">Yes</button>
+              <button class="btn btn-danger w-45" (click)="onAnswerReceived(false)">No</button>
+            </div>
+          </div>
+  
+          <!-- Custom Issue Form -->
+          <div *ngIf="showCustomIssueForm && !thankYouMessage" class="custom-issue-form animate-from-bottom">
+            <h5 class="mb-3">Describe your issue</h5>
+            <textarea class="form-control mb-3" [(ngModel)]="userMessage" placeholder="Your custom issue..." rows="4"></textarea>
+  
+            <!-- Error Message for Validation -->
+            <div *ngIf="customIssueError" class="text-danger mt-2">
+              Your issue must be at least 15 characters long.
+            </div>
+  
+            <button 
+              class="btn btn-primary w-100" 
+              (click)="submitCustomIssue()" 
+              [disabled]="userMessage.trim().length < 15">Submit Custom Issue</button>
+  
+            <button class="btn btn-outline-secondary w-100 mt-3" (click)="goBackToIssues()">Back</button>
+          </div>
+  
+          <!-- Thank You Message after submitting a custom issue -->
+          <div *ngIf="thankYouMessage" class="thank-you-message animate-from-bottom">
+            <p class="mb-3">Thank you for contacting support! We will resolve your issue as soon as possible.</p>
+            <button class="btn btn-primary w-100" (click)="resetChat()">Start Over</button>
+            &nbsp;<button class="btn btn-primary w-100" routerLink="/User-dashboard">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

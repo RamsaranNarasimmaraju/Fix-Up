@@ -1,0 +1,136 @@
+/* General styles for the container */
+.container-fluid {
+    min-height: 100vh; /* Ensure the container takes full height of the viewport */
+    padding: 0;
+    background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+    backdrop-filter: blur(5px); /* Adds blur effect behind the navbar */
+    position: fixed;
+    width: 100%;
+    z-index: 10; /* Ensures navbar stays on top */
+  }
+  
+  /* Navbar link color */
+  .navbar a {
+    color: #007bff !important; /* Ensure the navbar links are visible */
+  }
+  
+  /* Navbar toggler icon color */
+  .navbar-toggler-icon {
+    background-color: #007bff; /* Change the color of the toggler icon */
+  }
+  
+  /* Phone frame styling (Frosted glass effect) */
+  .phone-frame {
+    position: relative;
+    width: 450px; /* Static size of the frame */
+    height: 835px; /* Static height */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for frosted glass effect */
+    backdrop-filter: blur(10px); /* Blur effect for frosted glass appearance */
+    border-radius: 30px; /* Added a larger border radius for a rounded look */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow for better visibility */
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  /* Chat header */
+  .chat-header {
+    background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent primary color */
+    color: white;
+    padding: 20px;
+    border-radius: 30px 30px 0 0; /* Larger border radius on the header for consistency */
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    backdrop-filter: blur(5px); /* Subtle blur on the header for consistency */
+  }
+  
+  /* Chat body */
+  .chat-body {
+    padding: 20px;
+    height: calc(100% - 60px); /* Ensure the body fills the rest of the space after header */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align content to prevent overflow */
+  }
+  
+  /* Start Chat Button Container - Centered */
+  .chat-button-container {
+    height: 100%; /* Take full height of the parent container */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically center the button */
+  }
+  
+  /* For smooth animation */
+  @keyframes slideFromBottom {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the animation to elements with the class .animate-from-bottom */
+  .animate-from-bottom {
+    animation: slideFromBottom 0.6s ease-out forwards;
+  }
+  
+  /* Buttons for issue and solution selection */
+  .issue-list button,
+  .solution-list button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  /* Buttons in the solution and custom issue forms */
+  .answer-check button,
+  .custom-issue-form button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  /* Buttons for Yes/No in solution details */
+  .answer-check button {
+    width: 48%;
+  }
+  
+  /* Custom issue form */
+  .custom-issue-form {
+    text-align: center;
+  }
+  
+  /* Custom Issue Textarea */
+  .custom-issue-form textarea {
+    height: 120px;
+  }
+  
+  /* Thank You Message styling */
+  .thank-you-message {
+    margin-top: 10px; /* Adjust top margin for better spacing */
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(244, 244, 244, 0.8); /* Semi-transparent background for the thank you message */
+    border-radius: 15px; /* Slightly rounded corners for the thank you message */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* For responsiveness */
+  @media (max-width: 768px) {
+    .phone-frame {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

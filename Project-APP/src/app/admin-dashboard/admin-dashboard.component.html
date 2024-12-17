@@ -1,0 +1,155 @@
+<!-- Container Section -->
+<div class="container-fluid p-0">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/admin-dashboard">Dashboard</a>
+          </li>
+              
+        
+        
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/about">About</a>
+          </li>
+        
+        </ul>
+        <!-- Profile Icon -->
+        <i class="bi bi-person-circle text-primary" style="font-size: 2rem; cursor: pointer;" (click)="toggleSidebar()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="bold-shadow mb-4 text-dark">Admin Dashboard</h1>
+
+    <!-- Metrics Section -->
+    <div class="row text-center mb-4">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);">
+          <div class="card-body">
+            <h5 class="card-title text-dark">Total Tickets Raised</h5>
+            <p class="display-4 text-primary">{{ metrics?.totalTicketsRaised || 0 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);">
+          <div class="card-body">
+            <h5 class="card-title text-dark">Total Tickets Solved</h5>
+            <p class="display-4 text-success">{{ metrics?.totalTicketsSolved || 0 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);">
+          <div class="card-body">
+            <h5 class="card-title text-dark">Average Rating</h5>
+            <p class="display-4 text-warning">{{ metrics?.averageRating?.toFixed(1) || 0.0 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Actions Cards -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);">
+          <div class="card-body text-center">
+            <i class="bi bi-person-plus" style="font-size: 3rem; color: #007bff;"></i>
+            <h5 class="card-title mt-3 text-dark">Add Admin</h5>
+            <p class="card-text text-dark">Manage admin accounts.</p>
+            <a routerLink="/Add-Admin" class="btn btn-primary">Go to Add Admin</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);">
+          <div class="card-body text-center">
+            <i class="bi bi-person-workspace" style="font-size: 3rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3 text-dark">Add Support Engineer</h5>
+            <p class="card-text text-dark">Manage support engineer accounts.</p>
+            <a routerLink="/Add-Support" class="btn btn-success">Go to Add Engineer</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);">
+          <div class="card-body text-center">
+            <i class="bi bi-person-lines-fill" style="font-size: 3rem; color: #ffc107;"></i>
+            <h5 class="card-title mt-3 text-dark">User Details</h5>
+            <p class="card-text text-dark">View and manage user information.</p>
+            <a routerLink="/user-details" class="btn btn-warning">Go to User Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bars -->
+    <div class="row mb-4">
+      <div class="col-md-12 mb-4">
+        <div class="card shadow-lg frosted-card">
+          <div class="card-body text-center">
+            <h2 class="bold-shadow text-dark">Ticket Progress</h2>
+            <div class="mb-3">
+              <label class="bold-shadow text-dark">Total Tickets Solved</label>
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" [style.width]="getSolvedPercentage() + '%'" [attr.aria-valuenow]="getSolvedPercentage()" aria-valuemin="0" aria-valuemax="100">
+                  {{ getSolvedPercentage() }}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Sidebar (Unchanged) -->
+  <div class="sidebar" [class.show]="isSidebarOpen" style="width: 300px;">
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <h4 class="text-center text-dark">Admin Details</h4>
+        <button class="btn-close" aria-label="Close" (click)="toggleSidebar()"></button>
+      </div>
+      <div class="sidebar-body">
+        <p><strong>Name:</strong> {{ adminProfile?.userName }}</p>
+        <p><strong>Email:</strong> {{ adminProfile?.email }}</p>
+        <p><strong>Date Created:</strong> {{ adminProfile?.dateCreated | date:'medium' }}</p>
+        <button class="btn btn-primary mt-3" (click)="showChangePasswordForm = !showChangePasswordForm">
+          Change Password
+        </button>
+        <div *ngIf="showChangePasswordForm">
+          <h5 class="mt-4">Change Password</h5>
+          <form (ngSubmit)="changePassword()">
+            <div class="form-group">
+              <label for="oldPassword">Old Password</label>
+              <input type="password" id="oldPassword" [(ngModel)]="changePasswordData.oldPassword" name="oldPassword" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="newPassword">New Password</label>
+              <input type="password" id="newPassword" [(ngModel)]="changePasswordData.newPassword" name="newPassword" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input type="password" id="confirmPassword" [(ngModel)]="changePasswordData.confirmPassword" name="confirmPassword" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success mt-2">Update Password</button>
+          </form>
+          <p *ngIf="passwordSuccessMessage" class="text-success mt-2">{{ passwordSuccessMessage }}</p>
+          <p *ngIf="passwordError" class="text-danger mt-2">{{ passwordError }}</p>
+        </div>
+      </div>
+      <div class="sidebar-footer">
+       &nbsp; <button class="btn btn-danger w-100" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,223 @@
+/* Custom styles for the ticket cards */
+.ticket-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    width: 100%; /* Ensure card width is 100% of the available space */
+    height: 350px; /* Fixed height for each card */
+  }
+  
+  .ticket-card:hover {
+    transform: translateY(-5px); /* Hover effect */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .card-body {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1.5rem;
+    overflow-y: auto;
+    height: 200px; /* Fixed height for the card body */
+  }
+  
+  .card-footer {
+    background-color: #ffffff;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+  
+  .star.filled {
+    color: gold;
+  }
+  
+  /* Center the modal in the viewport */
+  .modal.fade.show {
+    display: block !important; /* Force modal to display */
+    opacity: 1 !important; /* Ensure modal is fully visible */
+  }
+  
+  .modal-dialog {
+    max-width: 600px; /* Control the width of the modal */
+    margin: 30px auto; /* Center modal horizontally and add top margin */
+  }
+  
+  .modal-content {
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better focus */
+  }
+  
+  .modal-header {
+    border-bottom: none; /* Remove bottom border */
+  }
+  
+  .modal-title {
+    font-size: 1.5rem; /* Larger title */
+    font-weight: bold;
+  }
+  
+  .close {
+    font-size: 1.5rem; /* Larger close icon */
+    color: #aaa;
+  }
+  
+  .close:hover {
+    color: #000; /* Darken close icon on hover */
+  }
+  
+  .star-rating {
+    font-size: 2rem;
+    color: #ccc;
+  }
+  
+  .star {
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .star.filled {
+    color: #f39c12; /* Gold color for filled stars */
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+  .modal-footer {
+    border-top: none;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 767px) {
+    .modal-dialog {
+      margin: 10px;
+      width: 90%;
+    }
+  }
+  
+  /* Override badge text color */
+  .badge-primary {
+    background-color: #007bff;
+    color: #ffffff; /* Ensure white text for primary badge */
+  }
+  
+  .badge-warning {
+    background-color: #ffc107;
+    color: #212529; /* Dark text for better contrast */
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+    color: #ffffff; /* White text for success badge */
+  }
+  
+  .badge-secondary {
+    background-color: #6c757d;
+    color: #ffffff; /* White text for secondary badge */
+  }
+  
+  /* Additional padding for readability */
+  .badge {
+    padding: 0.5em 0.75em;
+    font-size: 0.9rem;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+  
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    backdrop-filter: blur(5px); /* Optional: adds blur effect behind the navbar */
+  }
+  
+  .navbar a {
+    color: #007bff !important; /* Ensure the navbar links are visible */
+  }
+  
+  .container-fluid {
+    min-height: 100vh; /* Minimum height of 100% of the viewport height */
+  }
+  
+  /* Popup Card Styling */
+  .popup-card-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+  }
+  
+  .popup-card {
+    width: 40%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+  
+  .popup-card .card {
+    margin: 0;
+    border: none;
+  }
+  
+  .popup-card .star-rating .star {
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+  }
+  
+  .popup-card .star-rating .star.filled {
+    color: #ffc107;
+  }
+  
+  .popup-card .card-footer {
+    padding: 1rem;
+  }
+  
+  .popup-card textarea {
+    resize: none;
+    min-height: 100px;
+  }
+  

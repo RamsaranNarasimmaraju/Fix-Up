@@ -1,0 +1,127 @@
+<div
+  class="container-fluid p-0"
+  style="
+    background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+  "
+>
+  <!-- Navbar -->
+  <nav
+    class="navbar navbar-expand-lg navbar-light fixed-top"
+    style="background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);"
+  >
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/about">About</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Support Login Section -->
+  <div
+    class="d-flex align-items-center justify-content-center vh-100"
+    style="color: #fff;"
+  >
+    <!-- Login Card -->
+    <div
+      class="card shadow-lg p-5 rounded-4 bg-white bg-opacity-75"
+      style="max-width: 450px; width: 90%; backdrop-filter: blur(10px);"
+    >
+      <!-- Centered Icon -->
+      <div class="text-center mb-4">
+        <i class="bi bi-tools text-primary" style="font-size: 5rem;"></i>
+      </div>
+
+      <!-- Title -->
+      <h2 class="text-center fw-bold text-dark mb-4">Support Login</h2>
+
+      <!-- Login Form -->
+      <form (ngSubmit)="login(loginForm)"  #loginForm="ngForm">
+        <!-- Username -->
+        <div class="mb-3">
+          <label for="userName" class="form-label fw-bold text-dark">Username</label>
+          <input
+            type="text"
+            id="userName"
+            name="userName"
+            class="form-control"
+            [(ngModel)]="credentials.UserName"
+            required
+            minlength="8"
+            #userName="ngModel"
+          />
+          <!-- Error Messages -->
+          <small *ngIf="userName.errors?.['required']" class="text-danger">Username is required.</small>
+          <small *ngIf="userName.errors?.['minlength']" class="text-danger">Username must be at least 8 characters long.</small>
+        </div>
+      
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="userPassword" class="form-label fw-bold text-dark">Password</label>
+          <input
+            type="password"
+            id="userPassword"
+            name="userPassword"
+            class="form-control"
+            [(ngModel)]="credentials.UserPassWord"
+            required
+            #userPassword="ngModel"
+            (ngModelChange)="validatePassword(userPassword)"
+          />
+          <!-- Error Messages -->
+          <small *ngIf="userPassword.errors?.['missingCapital']" class="text-danger">Password must contain at least one Upper Case.</small>
+          <small *ngIf="userPassword.errors?.['missingSpecial']" class="text-danger">Password must contain at least one special character.</small>
+          <small *ngIf="userPassword.errors?.['missingNumber']" class="text-danger">Password must contain at least one numeric  value.</small>
+          <small *ngIf="userPassword.errors?.['minlength']" class="text-danger">Password must be at least 8 characters long.</small>
+        </div>
+      
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 py-2" [disabled]="!loginForm.valid">
+          Log In
+        </button>
+      </form>
+
+      <!-- Error Messages -->
+      <div *ngIf="invalidLogin" class="alert alert-danger mt-3 shadow-sm" role="alert">
+        Invalid username or password. Please try again.
+      </div>
+      <div
+        *ngIf="supportAccessError"
+        class="alert alert-danger mt-3 shadow-sm"
+        role="alert"
+      >
+        Only support Engineer can access this page.
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-4">
+       
+      </div>
+    </div>
+  </div>
+</div>

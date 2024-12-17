@@ -1,0 +1,65 @@
+<div class="container-fluid p-0" style="background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg'); background-size: cover; background-position: center; height: 100vh;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/admin-dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/about">About</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- User Management Section -->
+  <div class="container mt-5" style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.6); border-radius: 10px;">
+    <!-- Title Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="text-dark">User Management</h2>
+      <button class="btn btn-primary" (click)="downloadUserData()">Download User Data</button>
+    </div>
+
+    <!-- Card for User Table with Frosted Effect -->
+    <div class="card shadow-sm" style="background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);">
+      <div class="card-body">
+        <h5 class="card-title text-center">User Details</h5>
+        <p class="card-text text-center mb-4">View and manage user information in a structured and easy-to-read table.</p>
+
+        <!-- User Table -->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" style="background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);">
+            <thead class="table-dark">
+              <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Date Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{ user.userId }}</td>
+                <td>{{ user.userName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ getRoleName(user.roleId) }}</td>  
+                <td>{{ user.dateCreated | date: 'medium' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

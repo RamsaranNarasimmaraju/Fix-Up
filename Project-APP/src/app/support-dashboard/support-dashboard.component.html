@@ -1,0 +1,205 @@
+<div class="container-fluid p-0" style="background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg'); background-size: cover; background-position: center;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link text-dark" routerLink="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" routerLink="/about">About</a></li>
+         
+        </ul>
+        <!-- Profile Icon -->
+        <i class="bi bi-person-circle text-primary" style="font-size: 2rem; cursor: pointer;" (click)="toggleSidebar()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container mt-5">
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success text-center">{{ successMessage }}</div>
+
+    <!-- Tickets Table -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between">
+        <span>Tickets</span>
+        <i class="bi bi-ticket-fill"></i>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>Ticket ID</th>
+                <th>User ID</th>
+                <th>Issue Type</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of tickets">
+                <td>{{ ticket.ticketId }}</td>
+                <td>{{ ticket.userId }}</td>
+                <td>{{ ticket.issueType }}</td>
+                <td>{{ ticket.description }}</td>
+                <td>{{ ticket.tstatus }}</td>
+                <td>
+                  <button class="btn btn-warning btn-sm me-2" [disabled]="isButtonDisabled(ticket, 'InProgress')" (click)="updateStatus(ticket, 'InProgress')">
+                    In Progress
+                  </button>
+                  <button class="btn btn-success btn-sm" [disabled]="isButtonDisabled(ticket, 'Closed')" (click)="updateStatus(ticket, 'Closed')">
+                    Resolve
+                  </button>
+                  <button *ngIf="ticket.issueType === 'Refund' && ticket.fileUpload" class="btn btn-info btn-sm" (click)="showFilePopup(ticket.fileUpload)">
+                    <i class="bi bi-file-earmark"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issues Section -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card" style="height: 400px; overflow-y: auto;">
+          <div class="card-header">
+            <h5>Issues</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let issue of issues">
+              <div class="card mb-2">
+                <div class="card-header">
+                  <h6>{{ issue.issueCategory }}</h6>
+                </div>
+                <div class="card-body">
+                  <p>{{ issue.issueCategory }}</p>
+                  <button class="btn btn-info btn-sm" (click)="viewSolutions(issue.issueId)">
+                    View Solutions
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Section -->
+      <div class="col-md-6">
+        <div class="card" *ngIf="selectedSolutions.length > 0">
+          <div class="card-header">
+            <h5>Solutions</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let solution of selectedSolutions">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <p>{{ solution.solution1 }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Issues Table -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-secondary text-white d-flex justify-content-between">
+        <span>Custom Issues</span>
+        <i class="bi bi-question-circle"></i>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>Custom Issue ID</th>
+                <th>Issue Description</th>
+                <th>Solution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customIssue of customIssues">
+                <td>{{ customIssue.customId }}</td>
+                <td>{{ customIssue.cutomIssue }}</td>
+                <td>
+                  <div *ngIf="customIssue.customSolution">
+                    <p><strong>Solution:</strong> {{ customIssue.customSolution }}</p>
+                  </div>
+                  <div *ngIf="!customIssue.customSolution">
+                    <input type="text" [(ngModel)]="newCustomSolution" class="form-control" placeholder="Add a solution" />
+                    <button class="btn btn-success btn-sm mt-2" (click)="addCustomSolution(customIssue)">Add Solution</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Issue and Solution -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-primary text-white">
+        <span>Add New Issue and Solution</span>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="issueCategory" class="form-label">Issue Category</label>
+            <input type="text" id="issueCategory" [(ngModel)]="newIssue.issueCategory" name="issueCategory" class="form-control" required />
+          </div>
+        
+        <button type="button" class="btn btn-primary" (click)="addIssue()">Add  Isssue</button>
+        <div *ngIf="validationMessage" class="alert alert-danger mt-3">{{ validationMessage }}</div>
+          <div class="mb-3">
+            <label for="solution" class="form-label">Solution</label>
+            <textarea id="solution" [(ngModel)]="newSolution.solution1" name="solution1" class="form-control" required></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="addSolution()">Add  Solution</button>
+          <div *ngIf="validationMessage" class="alert alert-danger mt-3">{{ validationMessage }}</div>
+        </form>
+      </div>
+    </div>
+
+    <!-- File Popup -->
+    <div *ngIf="showPopup" class="popup-overlay">
+      <div class="popup-card">
+        <button class="btn-close" (click)="closePopup()">×</button>
+        <div class="popup-content">
+          <h5>Uploaded File</h5>
+          <img *ngIf="fileData" [src]="fileData" alt="Uploaded File" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" [class.show]="isSidebarOpen" style="width: 300px;">
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <h4 class="text-center text-dark">Support Engineer Details</h4>
+        <button class="btn-close" aria-label="Close" (click)="toggleSidebar()"></button>
+      </div>
+      <div class="sidebar-body">
+        <p><strong>Name:</strong> {{ supportProfile?.userName }}</p>
+        <p><strong>Email:</strong> {{ supportProfile?.email }}</p>
+        <p><strong>Date Created:</strong> {{ supportProfile?.dateCreated | date:'medium' }}</p>
+      </div>
+      <div class="sidebar-footer">
+        <button class="btn btn-danger w-100" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

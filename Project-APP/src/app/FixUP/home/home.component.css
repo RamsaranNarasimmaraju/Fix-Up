@@ -1,0 +1,20 @@
+/* Hero Section */
+
+  /* Button Hover Effects */
+  .btn-primary:hover {
+    background-color: #1976d2 !important;
+    border-color: #1976d2 !important;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #1976d2 !important;
+    color: #ffffff !important;
+    border-color: #1976d2 !important;
+  }
+  
+  /* Navbar */
+ 
+   /* Navbar link color */
+   .navbar a {
+    color: #007bff !important; /* Ensure the navbar links are visible */
+  }

@@ -1,0 +1,167 @@
+<div
+  class="container-fluid p-0"
+  style="
+    background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+  "
+>
+  <!-- Navbar -->
+  <nav
+    class="navbar navbar-expand-lg navbar-light fixed-top"
+    style="background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);"
+  >
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/about">About</a>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Registration Section -->
+  <div
+    class="d-flex align-items-center justify-content-center vh-100"
+    style="color: #fff;"
+  >
+    <!-- Registration Card -->
+    <div
+      class="card shadow-lg p-5 rounded-4 bg-white bg-opacity-75"
+      style="max-width: 500px; width: 90%; backdrop-filter: blur(10px);"
+    >
+      <div class="text-center mb-4">
+        <i class="bi bi-person-plus text-primary" style="font-size: 3rem;"></i>
+        <h2 class="fw-bold mt-3">Create Your Account</h2>
+        <p class="text-muted">Join us and start your journey today.</p>
+      </div>
+
+      <!-- Registration Form -->
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+      <!-- Username -->
+<div class="mb-3">
+  <label for="userName" class="form-label fw-bold">Username</label>
+  <input
+    type="text"
+    id="userName"
+    name="userName"
+    [(ngModel)]="user.userName"
+    required
+    class="form-control"
+    placeholder="Enter your username"
+    (blur)="validateUsernameAvailability()"
+  />
+  <!-- Show error if username is taken -->
+  <div *ngIf="usernameTaken" class="form-text text-danger">
+    Username already taken. Please try a different one.
+  </div>
+  <!-- Show error if username is too short -->
+  <div *ngIf="user.userName && user.userName.length < 8" class="form-text text-danger">
+    Username must be at least 8 characters long.
+  </div>
+</div>
+
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label fw-bold">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="user.email"
+            required
+            class="form-control"
+            placeholder="Enter your email"
+          />
+          <div *ngIf="user.email && !emailValid()" class="form-text text-danger">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="userPassword" class="form-label fw-bold">Password</label>
+          <input
+            type="password"
+            id="userPassword"
+            name="userPassword"
+            [(ngModel)]="user.userPassword"
+            required
+            class="form-control"
+            placeholder="Enter your password"
+          />
+          <div *ngIf="user.userPassword && !passwordValid()" class="form-text text-danger">
+            Password must be at least 8 characters long and contain one uppercase letter, one number, and one special character.
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label fw-bold">Re-enter Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            required
+            class="form-control"
+            placeholder="Re-enter your password"
+          />
+          <div *ngIf="!passwordsMatch() && confirmPassword" class="form-text text-danger">
+            Passwords do not match!
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn btn-primary w-100 py-2"
+          [disabled]="!registerForm.valid || !passwordsMatch() || usernameTaken"
+        >
+          Register
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert alert-success mt-3 shadow-sm" role="alert">
+        {{ successMessage }}
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3 shadow-sm" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-3">
+        <p class="text-muted">
+          Already have an account?
+          <a routerLink="/login" class="text-primary text-decoration-none">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

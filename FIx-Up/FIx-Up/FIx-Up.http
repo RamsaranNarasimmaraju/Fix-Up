@@ -1,0 +1,6 @@
+@FIx_Up_HostAddress = http://localhost:5230
+
+GET {{FIx_Up_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

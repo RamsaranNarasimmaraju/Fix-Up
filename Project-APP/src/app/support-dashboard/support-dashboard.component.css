@@ -1,0 +1,270 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+ 
+  }
+  
+  /* Card Styling */
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table Styling */
+  .table th, 
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Button Styling */
+  .btn {
+    border-radius: 25px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btn-warning:hover {
+    background-color: #e0a800;
+    color: #fff;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+  }
+  
+  /* Alert Message */
+  .alert {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Form Styling */
+  form {
+    padding: 10px;
+  }
+  
+  form input, 
+  form textarea {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  form input:focus, 
+  form textarea:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Section Header Styling */
+  .card-header {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+  
+  /* List Group Styling */
+  .list-group-item {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .list-group-item:last-child {
+    border-bottom: none;
+  }
+  
+  .list-group-item button {
+    margin-left: auto;
+  }
+  
+  /* Custom Issues Section */
+  .custom-issue-input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .list-group-item .form-control {
+    width: auto;
+  }
+  
+  /* Add Issue and Solution Section */
+  .add-issue-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-issue-form .form-label {
+    font-weight: 600;
+  }
+  
+  .add-issue-form button {
+    align-self: flex-start;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .table {
+      font-size: 14px;
+    }
+  
+    .btn {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+  }
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    backdrop-filter: blur(5px); /* Optional: adds blur effect behind the navbar */
+  }
+  
+  .navbar a {
+    color: #007bff !important; /* Ensure the navbar links are visible */
+  }
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .popup-content {
+    margin-top: 20px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  /* Background Image */
+.container-fluid {
+  min-height: 100vh;
+  background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Cards with Translucent Effect */
+.card {
+  background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.navbar a {
+  color: #007bff !important;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Sidebar with Frosted Glass Effect */
+.sidebar {
+  position: fixed;
+  top: 10%;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1050;
+}
+
+.sidebar.show {
+  right: 0;
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+/* Bold Text with Shadows */
+.bold-shadow {
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.display-4 {
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-dark {
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+  

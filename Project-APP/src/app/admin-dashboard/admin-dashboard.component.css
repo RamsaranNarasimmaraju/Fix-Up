@@ -1,0 +1,89 @@
+/* Background Image */
+.container-fluid {
+  min-height: 100vh; /* Ensure it covers the entire screen */
+  background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Cards with Translucent Effect */
+.card {
+  background-color: rgba(255, 255, 255, 0.7); /* White background with transparency */
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* Optional: adds blur effect behind the cards */
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Slight hover effect */
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  backdrop-filter: blur(5px); /* Optional: adds blur effect behind the navbar */
+}
+
+.navbar a {
+  color: #007bff !important; /* Ensure the navbar links are visible */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Sidebar with Frosted Glass Effect */
+.sidebar {
+  position: fixed;
+  top: 10%;
+  right: -300px; /* Sidebar is hidden by default */
+  width: 300px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7); /* Transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1050; /* Make sure the sidebar is above other content */
+}
+
+.sidebar.show {
+  right: 0; /* Slide in the sidebar */
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+/* Bold Text with Shadows */
+.bold-shadow {
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Specific Styling for Text */
+h1, h2 {
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect for titles */
+}
+
+.display-4 {
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect for display texts */
+}
+
+.text-dark {
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect for text */
+}

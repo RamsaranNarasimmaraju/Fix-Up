@@ -1,0 +1,95 @@
+<div
+  class="container-fluid p-0"
+  style="
+    background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Ensure the background covers full screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  "
+>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/User-dashboard">Dashboard</a>
+          </li>
+              
+        
+        
+          <li class="nav-item">
+            <a class="nav-link text-dark" routerLink="/about">About</a>
+          </li>
+        
+        </ul>
+        <!-- Profile Icon -->
+       
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Page Content (Adjusted for 100vh) -->
+  <div class="container py-5" style="margin-top: 100px; flex-grow: 1; background-color: rgba(0, 0, 0, 0.2);">
+    <h2 class="text-center text-white mb-4">
+      <strong style="color: #ffcb05; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Your Custom Solutions</strong>
+    </h2>
+
+    <!-- Check if there are any custom issues to display -->
+    <div *ngIf="customIssues.length > 0; else noIssues">
+      <div class="row justify-content-center">
+        <!-- Loop through the custom issues and display them in fixed-size cards -->
+        <div class="col-md-4 mb-4 d-flex justify-content-center" *ngFor="let issue of customIssues">
+          <div
+            class="card shadow-lg border-light"
+            style="
+              backdrop-filter: blur(8px);
+              background-color: rgba(255, 255, 255, 0.8);
+              border-radius: 15px;
+              padding: 20px;
+              width: 300px;  /* Set fixed width */
+              height: 250px; /* Set fixed height */
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            "
+          >
+            <div class="card-body">
+              <h5 class="card-title text-primary fw-bold">
+                <strong>Issue:</strong> {{ issue.cutomIssue }}
+              </h5>
+              <p class="card-text">
+                <strong>Solution:</strong> {{ issue.customSolution || 'Pending' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template for no issues -->
+    <ng-template #noIssues>
+      <div
+        class="alert alert-warning text-center"
+        style="backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.7);"
+        role="alert"
+      >
+        No custom issues found for user ID {{ userId }}. Please create one to get
+        a solution.
+      </div>
+    </ng-template>
+  </div>
+</div>

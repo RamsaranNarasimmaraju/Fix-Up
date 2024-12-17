@@ -1,0 +1,102 @@
+<div class="container-fluid p-0" style="background-image: url('https://www.goodcorporation.com/wp-content/uploads/2018/10/compliance-support.jpg'); background-size: cover; background-position: center; height: 100vh;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" routerLink="/">
+        <i class="bi bi-headset"></i> FIX-UP
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-semibold" routerLink="/User-dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-semibold" routerLink="/about">About</a>
+          </li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Form Section -->
+  <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="form-card shadow-lg rounded" style="width: 100%; max-width: 600px; backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.5); padding: 30px;">
+
+      <h2 class="text-center text-primary mb-4">Create Support Ticket</h2>
+  
+      <form [formGroup]="ticketForm" (ngSubmit)="submitTicket()">
+        <!-- Issue Type Dropdown -->
+        <div class="mb-4">
+          <label for="issueType" class="form-label">Issue Type</label>
+          <select
+            id="issueType"
+            class="form-select custom-select shadow-sm"
+            formControlName="issueType"
+            (change)="onIssueTypeChange()"
+            [ngClass]="{ 'is-invalid': ticketForm.get('issueType')?.invalid && ticketForm.get('issueType')?.touched }"
+          >
+            <option value="" disabled selected>Select an issue type</option>
+            <option *ngFor="let type of issueTypes" [value]="type">{{ type }}</option>
+          </select>
+          <div *ngIf="ticketForm.get('issueType')?.invalid && ticketForm.get('issueType')?.touched" class="text-danger mt-2">
+            Please select an issue type.
+          </div>
+        </div>
+  
+        <!-- Description -->
+        <div class="mb-4">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            rows="4"
+            class="form-control custom-textarea shadow-sm"
+            formControlName="description"
+            placeholder="Describe your issue in detail..."
+            [ngClass]="{ 'is-invalid': ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched }"
+          ></textarea>
+          <div *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched" class="text-danger mt-2">
+            Description is required and must be at least 10 characters long.
+          </div>
+        </div>
+  
+        <!-- Refund Receipt Upload (Conditional) -->
+        <div class="mb-4" *ngIf="isRefund">
+          <label for="fileUpload" class="form-label">Upload Receipt</label>
+          <div class="custom-file">
+            <input
+              type="file"
+              id="fileUpload"
+              class="form-control custom-file-input shadow-sm"
+              (change)="onFileChange($event)"
+              [ngClass]="{ 'is-invalid': ticketForm.get('fileUpload')?.invalid && ticketForm.get('fileUpload')?.touched }"
+            />
+            <div *ngIf="ticketForm.get('fileUpload')?.invalid && ticketForm.get('fileUpload')?.touched" class="text-danger mt-2">
+              Please upload a receipt for refund issues.
+            </div>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary shadow-sm" [disabled]="ticketForm.invalid">Submit Ticket</button>
+        </div>
+      </form>
+
+      <!-- Success/Error Message Section -->
+      <div class="mt-3" *ngIf="successMessage || errorMessage">
+        <div *ngIf="successMessage" class="text-success">
+          <strong>Success:</strong> {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="text-danger">
+          <strong>Error:</strong> {{ errorMessage }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
