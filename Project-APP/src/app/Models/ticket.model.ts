@@ -14,6 +14,7 @@ export interface TicketCreateDto {
     tstatus?: string;  // Status of the ticket
     resolvedDate?: string;  // The resolved date in ISO string format
     fileUpload?: string;  // This will store the file as a byte array
+    feedbackSubmitted?: boolean;
   }
   export interface TicketUpdateDto {
     ticketId: number;

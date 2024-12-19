@@ -70,6 +70,13 @@ export class StatusComponent {
         if (this.tickets.length === 0) {
           this.errorMessage = 'No tickets found for this user.';
         }
+  
+        // Populate feedbackSubmittedTickets based on local storage or another logic
+        this.tickets.forEach(ticket => {
+          if (this.feedbackSubmittedTickets.has(ticket.ticketId)) {
+            ticket['feedbackSubmitted'] = true; // Dynamically add the property
+          }
+        });
       },
       error: (err) => {
         this.errorMessage = 'Error retrieving tickets.';
@@ -77,7 +84,9 @@ export class StatusComponent {
       }
     });
   }
-
+  
+  
+  
   openFeedbackModal(ticketId: number): void {
     if (this.feedbackSubmittedTickets.has(ticketId)) {
       console.log(`Feedback already submitted for ticket ID: ${ticketId}`);

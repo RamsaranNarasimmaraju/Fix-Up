@@ -140,6 +140,7 @@
                   <div *ngIf="!customIssue.customSolution">
                     <input type="text" [(ngModel)]="newCustomSolution" class="form-control" placeholder="Add a solution" />
                     <button class="btn btn-success btn-sm mt-2" (click)="addCustomSolution(customIssue)">Add Solution</button>
+                    <div *ngIf="validationMessage" class="alert alert-danger mt-3">{{ validationMessage }}</div>
                   </div>
                 </td>
               </tr>
