@@ -33,6 +33,7 @@ export class SupportDashboardComponent implements OnInit {
   fileData: string | null = null; 
   supportProfile: UserReadDto | null = null;
   isSidebarOpen = false;
+  hiddenTicketIds: Set<number> = new Set(); 
 
   constructor(
     private router: Router,
@@ -65,10 +66,11 @@ export class SupportDashboardComponent implements OnInit {
   // Fetch tickets from the API
   fetchTickets(): void {
     this.ticketService.getTickets().subscribe((data) => {
-      this.tickets = data;
+      this.tickets = data.filter(ticket => ticket.tstatus !== 'Closed'); // Filter out closed tickets
       this.filterRefundTickets();
     });
   }
+  
 
   // Filter tickets with issueType "Refund"
   filterRefundTickets(): void {
@@ -274,4 +276,5 @@ addSolution() {
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
+  
 }

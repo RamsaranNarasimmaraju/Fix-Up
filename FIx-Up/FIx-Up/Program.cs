@@ -66,6 +66,7 @@ builder.Services.AddSwaggerGen(setup =>
 
 // Add services to the container.
 
+
 builder.Services.AddScoped<IFixupRepository<Role, RoleReadDto,RoleCreateDto,RoleUpdateDto>, RoleRepo>();
 builder.Services.AddScoped<IFixupRepository<User,UserReadDto,UserCreateDto,UserUpdateDto>, UserRepo>();
 builder.Services.AddScoped<IFixupRepository<Ticket,TicketReadDto,TicketCreateDto,TicketUpdateDto>,TicketRepo>();

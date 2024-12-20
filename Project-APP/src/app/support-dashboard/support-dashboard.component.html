@@ -25,7 +25,6 @@
     <!-- Success Message -->
     <div *ngIf="successMessage" class="alert alert-success text-center">{{ successMessage }}</div>
 
-    <!-- Tickets Table -->
     <div class="card shadow-sm mb-4">
       <div class="card-header bg-primary text-white d-flex justify-content-between">
         <span>Tickets</span>
@@ -45,24 +44,28 @@
               </tr>
             </thead>
             <tbody>
+              <!-- Filter out closed tickets -->
               <tr *ngFor="let ticket of tickets">
-                <td>{{ ticket.ticketId }}</td>
-                <td>{{ ticket.userId }}</td>
-                <td>{{ ticket.issueType }}</td>
-                <td>{{ ticket.description }}</td>
-                <td>{{ ticket.tstatus }}</td>
-                <td>
-                  <button class="btn btn-warning btn-sm me-2" [disabled]="isButtonDisabled(ticket, 'InProgress')" (click)="updateStatus(ticket, 'InProgress')">
-                    In Progress
-                  </button>
-                  <button class="btn btn-success btn-sm" [disabled]="isButtonDisabled(ticket, 'Closed')" (click)="updateStatus(ticket, 'Closed')">
-                    Resolve
-                  </button>
-                  <button *ngIf="ticket.issueType === 'Refund' && ticket.fileUpload" class="btn btn-info btn-sm" (click)="showFilePopup(ticket.fileUpload)">
-                    <i class="bi bi-file-earmark"></i>
-                  </button>
-                </td>
+                <ng-container *ngIf="ticket.tstatus !== 'Closed'">
+                  <td>{{ ticket.ticketId }}</td>
+                  <td>{{ ticket.userId }}</td>
+                  <td>{{ ticket.issueType }}</td>
+                  <td>{{ ticket.description }}</td>
+                  <td>{{ ticket.tstatus }}</td>
+                  <td>
+                    <button class="btn btn-warning btn-sm me-2" [disabled]="isButtonDisabled(ticket, 'InProgress')" (click)="updateStatus(ticket, 'InProgress')">
+                      In Progress
+                    </button>
+                    <button class="btn btn-success btn-sm" [disabled]="isButtonDisabled(ticket, 'Closed')" (click)="updateStatus(ticket, 'Closed')">
+                      Resolve
+                    </button>
+                    <button *ngIf="ticket.issueType === 'Refund' && ticket.fileUpload" class="btn btn-info btn-sm" (click)="showFilePopup(ticket.fileUpload)">
+                      <i class="bi bi-file-earmark"></i>
+                    </button>
+                  </td>
+                </ng-container>
               </tr>
+              
             </tbody>
           </table>
         </div>
