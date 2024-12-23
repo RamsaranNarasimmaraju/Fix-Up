@@ -7,18 +7,17 @@ USE FixupDb
 CREATE TABLE roles (
     RoleId INT IDENTITY(1,1) PRIMARY KEY,
     RoleName NVARCHAR(50) NOT NULL UNIQUE
-)
-create table Login(
-UserName nvarchar(20),
-UserPassword nvarchar(50)
-)
+--create table Login(
+--UserName nvarchar(20),
+--UserPassword nvarchar(50)
+--)
 select*from roles
 
 -- Inserting roles
 INSERT INTO roles (RoleName) VALUES ('Admin'), ('User'), ('Support Engineer')
 
 -- Users table
-
+select*from users
 
 create TABLE users (
     UserId INT IDENTITY(1,1) PRIMARY KEY,
@@ -52,6 +51,7 @@ create TABLE users (
 )
 
 -- Inserting user data
+select*from users
 
 INSERT INTO users (UserName, Email, userPassword, RoleId) VALUES 
 ('RamSaranraju', 'ramsaran0168@gmail.com', 'Ramsaran$12345', 2),
@@ -59,8 +59,9 @@ INSERT INTO users (UserName, Email, userPassword, RoleId) VALUES
 ('RamAdmin', 'ramsarannaras@gmail.com', 'RamAdmin@1', 1),
 ('SupportEngineer', 'support@example.com', 'Support$123', 3);
 select*from users
+select*from Feedback
 
-Select*from Issues
+Select*from Tickets
 -- Ticket details table
 ALTER TABLE Tickets
 ADD FileUpload VARBINARY(MAX) NULL;
@@ -77,7 +78,6 @@ CREATE TABLE Tickets (
 insert into Tickets(UserId,IssueType,Description) values(2,'Product','Product deliverd is damaged')
 select *from 
 
--- Create Trigger for AssignedTo constraint
 select*from Issues
 
 -- Issues table
@@ -100,7 +100,9 @@ INSERT INTO Issues (IssueCategory) VALUES ('Wrong product delivered');
 INSERT INTO Solutions (IssueID, Solution) VALUES (1, 'Follow the steps to resolve this issue: 1. Go to ticket section 2. Select Product 3. Enter the Bill number in issued bill and report the issue and submit. Your product will be exchanged or you can raise for refund');
 
 
-
+INSERT INTO Issues (IssueCategory) VALUES ('Server Not Responding'),('Product Defective'),('Product Not Delivered'),
+('I raised a refund request but still not received'),('The Product is a Scam'),('I need a  refund for the Particular Product'),
+('Help me How to Raise a Ticket')
 -- Feedback table
 CREATE TABLE Feedback (
     FeedbackId INT IDENTITY(1,1) PRIMARY KEY,
@@ -112,16 +114,7 @@ CREATE TABLE Feedback (
 insert into Feedback(TicketID,Rating)  values(1,4)
 insert into Feedback(TicketID,Rating)  values(1,5)
 
--- Refund table
-drop table Refunds
-CREATE TABLE Refunds (
-    RefundId INT IDENTITY(1,1) PRIMARY KEY,
-    TicketId INT FOREIGN KEY REFERENCES Tickets(TicketId),
-    Refund_Amount DECIMAL(10,2) NOT NULL,
-    Refundstatus NVARCHAR(50) DEFAULT 'pending' CHECK (Refundstatus IN ('pending', 'Approved', 'Rejected')),
-    ProcessedDate DATETIME DEFAULT GETDATE()
-)
-alter VIEW Dashboard AS
+create VIEW Dashboard AS
 SELECT
     COUNT(DISTINCT T.TicketId) AS TotalTicketsRaised,
     COUNT(DISTINCT CASE WHEN T.TStatus = 'closed' THEN T.TicketId END) AS TotalTicketsSolved,
@@ -146,4 +139,34 @@ LEFT JOIN
 	select*from CustomIssue
 	select*from Solutions
 	select*from Tickets
-	truncate table customIssue
+	truncate table Issues
+	select *from Feedback
+	INSERT INTO Solutions (IssueID, Solution) VALUES (1, 'To Solve this Issue Follow these Steps:
+	1.Try Reloading the Server,
+	2.Logout your Account and Try logging in again,
+	3.If not solved yet raise a ticket for server Issue in the create Ticket Section')
+	INSERT INTO Solutions (IssueID, Solution) VALUES(2,'To Solve this Issue Follow these Steps:
+	1.Ensure the Product is a defective one before delivered,
+	2.Go to Create Ticket section,
+	3.Upload your Bill and request for refund')
+	INSERT INTO Solutions (IssueID, Solution) VALUES(3,'To Solve this Issue Follow these Steps:
+	1.Ensure the Product Reached Delivery Station,
+	2.If yes Try contacting the Local Delivery Station,
+	3.If not received claim refund by raising a ticket')
+	INSERT INTO Solutions (IssueID, Solution) VALUES(4,'To Solve this Issue Follow these Steps:
+	1.Go to the Ticket Status Section,
+	2.There You can Check the Status of your Tickets,
+	3.If the Ticket status is closed and still you did not receive the refund wait for 2 days ')
+		INSERT INTO Solutions (IssueID, Solution) VALUES(5,'To Solve this Issue Follow these Steps:
+	1.Go to Report Section,
+	2.Report the Product as Scam,
+	3.The team will verify it and you will be refunded for the particular product within 2 business days ')
+		INSERT INTO Solutions (IssueID, Solution) VALUES(6,'To Solve this Issue Follow these Steps:
+	1.Go to Create a Ticket section,
+	2.Choose Issue type as Refund,
+	3.Submit the invoice of that purchase and you will be refunded within 2 business  days ')
+		INSERT INTO Solutions (IssueID, Solution) VALUES(7,'To Solve this Issue Follow these Steps:
+	1.Go to Create Ticket Section,
+	2.Choose the Issue Type and give the description,
+	3.If the Issue Type is Refund you should submit the invoice 
+	4.Click on Submit button and check you Ticket Status in the Status Section')

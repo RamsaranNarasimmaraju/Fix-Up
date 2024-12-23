@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FIx-Up")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2758c8651c7fb27fa1f129651eba070009352469")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72e6ce6c03f4891bdba631976a78c9ea7a901cf8")]
 [assembly: System.Reflection.AssemblyProductAttribute("FIx-Up")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FIx-Up")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
